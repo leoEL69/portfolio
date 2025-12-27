@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+
+        <a href="index.html" class="logo">Leo</a>
+
+        <nav>
+            <a href="index.html">home</a>
+            <a href="Services.html">Services</a>
+            <a href="skills.html">skills</a>
+            <a href="Experience.html">Projects</a>
+            <a href="Contact.html" class="active">Contact</a>
+    
+        </nav>
+    </header>
+
+    <section class="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+
+        <form id="contact-form" class="contact-form">
+            <div class="input-box">
+                <input type="text" id="user_name" name="user_name" placeholder="Full Name" required>
+                <input type="email" id="user_email" name="user_email" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-box">
+                <input type="text" id="subject" name="subject" placeholder="Email Subject" required>
+            </div>
+
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+
+            <button type="submit" class="btn" id="submit-btn">
+                <span id="btn-text">Send Message</span>
+                <span id="btn-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Sending...
+                </span>
+            </button>
+            
+            <div id="form-status" style="margin-top: 2rem; font-size: 1.6rem;"></div>
+        </form>
+
+        <div class="contact-info">
+            <div class="info-box">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h3>Email</h3>
+                    <p>leonardo.iazz098@gmail.com</p>
+                </div>
+            </div>
+            
+
+            <div class="info-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h3>Location</h3>
+                    <p>In Memory, CPU</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+     
+        emailjs.init("pnyWQSen_xKTcq3VY");
+
+   
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            const submitBtn = document.getElementById('submit-btn');
+            const formStatus = document.getElementById('form-status');
+
+          
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            formStatus.innerHTML = '';
+
+            
+            emailjs.sendForm('service_37m75ef', 'template_63t8u77', this)
+                .then(function() {
+                    // Sucesso
+                    formStatus.innerHTML = '<span style="color: #9333EA; font-weight: 600;"><i class="fas fa-check-circle"></i> Message sent successfully!</span>';
+                    document.getElementById('contact-form').reset();
+                    
+                
+                    btnText.style.display = 'inline-block';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+
+                
+                    setTimeout(() => {
+                        formStatus.innerHTML = '';
+                    }, 5000);
+                }, function(error) {
+                  
+                    formStatus.innerHTML = '<span style="color: #ff6b6b; font-weight: 600;"><i class="fas fa-exclamation-circle"></i> Failed to send message. Please try again.</span>';
+                    
+              
+                    btnText.style.display = 'inline-block';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+
+                    console.error('EmailJS Error:', error);
+                });
+        });
+    </script>
+
+</body>
+</html>
+
