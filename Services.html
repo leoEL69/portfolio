@@ -13,15 +13,57 @@
 
         <a href="index.html" class="logo">Leo</a>
 
-        <nav>
+        <div class="menu-icon" id="menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="navbar">
             <a href="index.html">home</a>
             <a href="Services.html" class="active">Services</a>
             <a href="skills.html">skills</a>
             <a href="Experience.html">Projects</a>
             <a href="Contact.html">Contact</a>
-    
         </nav>
     </header>
+
+    <script>
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.getElementById('navbar');
+
+        function toggleMenu() {
+            navbar.classList.toggle('active');
+            const icon = menuIcon.querySelector('i');
+            if (navbar.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        menuIcon.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                const icon = menuIcon.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navbar.classList.contains('active') && 
+                !navbar.contains(e.target) && 
+                !menuIcon.contains(e.target)) {
+                navbar.classList.remove('active');
+                const icon = menuIcon.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
 
     <section class="services">
         <h2 class="heading">My <span>Services</span></h2>
