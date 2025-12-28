@@ -6,7 +6,6 @@
     <title>Projects - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="translations.js"></script>
 
 </head>
 <body>
@@ -19,14 +18,11 @@
         </div>
 
         <nav id="navbar">
-            <a href="index.html" data-translate="nav-home">home</a>
-            <a href="Services.html" data-translate="nav-services">Services</a>
-            <a href="skills.html" data-translate="nav-skills">skills</a>
-            <a href="Experience.html" class="active" data-translate="nav-projects">Projects</a>
-            <a href="Contact.html" data-translate="nav-contact">Contact</a>
-            <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" title="Change Language">
-                <i class="fas fa-globe"></i> <span id="lang-icon">PT</span>
-            </button>
+            <a href="index.html">home</a>
+            <a href="Services.html">Services</a>
+            <a href="skills.html">skills</a>
+            <a href="Experience.html" class="active">Projects</a>
+            <a href="Contact.html">Contact</a>
         </nav>
     </header>
 
@@ -60,69 +56,46 @@
         document.addEventListener('click', (e) => {
             if (navbar.classList.contains('active') && 
                 !navbar.contains(e.target) && 
-                !menuIcon.contains(e.target) &&
-                !e.target.closest('#lang-toggle')) {
+                !menuIcon.contains(e.target)) {
                 navbar.classList.remove('active');
                 const icon = menuIcon.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
         });
-
-        const langToggle = document.getElementById('lang-toggle');
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                if (window.innerWidth <= 995) {
-                    setTimeout(() => {
-                        navbar.classList.remove('active');
-                        const icon = menuIcon.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }, 100);
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentLang = getCurrentLanguage();
-            const langIcon = document.getElementById('lang-icon');
-            if (langIcon) {
-                langIcon.textContent = currentLang === 'pt' ? 'PT' : 'EN';
-            }
-        });
     </script>
 
     <section class="experience">
-        <h2 class="heading"><span data-translate="projects-title">My</span> <span data-translate="projects-subtitle">Projects</span></h2>
+        <h2 class="heading">My <span>Projects</span></h2>
 
         <div class="experience-container">
             <div class="experience-box">
                 <div class="experience-content">
-                    <span class="year"><i class="fab fa-github"></i> <span data-translate="projects-cpp">C++ Project</span></span>
-                    <h3 data-translate="projects-untitled">Untitled-Injector</h3>
-                    <p data-translate="projects-untitled-subtitle">DLL Injector with GUI</p>
-                    <p data-translate="projects-untitled-desc">A simple DLL injector written in C++ with a graphical interface for Windows. Features include listing running processes, selecting target processes, and DLL injection using WinAPI. Also includes basic process management features like pausing and resuming processes.</p>
-                    <a href="https://github.com/leoEL69/Untitled-Injector.git" target="_blank" class="btn"><span data-translate="projects-github">View on GitHub</span> <i class="fab fa-github"></i></a>
+                    <span class="year"><i class="fab fa-github"></i> C++ Project</span>
+                    <h3>Untitled-Injector</h3>
+                    <p>DLL Injector with GUI</p>
+                    <p>A simple DLL injector written in C++ with a graphical interface for Windows. Features include listing running processes, selecting target processes, and DLL injection using WinAPI. Also includes basic process management features like pausing and resuming processes.</p>
+                    <a href="https://github.com/leoEL69/Untitled-Injector.git" target="_blank" class="btn">View on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </div>
 
             <div class="experience-box">
                 <div class="experience-content">
-                    <span class="year"><i class="fab fa-github"></i> <span data-translate="projects-security">Security Research</span></span>
-                    <h3 data-translate="projects-valorant">ValorantBypass</h3>
-                    <p data-translate="projects-valorant-subtitle">Vanguard TPM/Secure Boot Bypass Tool</p>
-                    <p data-translate="projects-valorant-desc">Tool developed for educational and research purposes that bypasses the TPM/Secure Boot popup in Valorant. Features include stopping Vanguard service, suspending watchdog processes, and using Sysinternals for safe process suspension. Written in C++.</p>
-                    <a href="https://github.com/leoEL69/ValorantBypass.git" target="_blank" class="btn"><span data-translate="projects-github">View on GitHub</span> <i class="fab fa-github"></i></a>
+                    <span class="year"><i class="fab fa-github"></i> Security Research</span>
+                    <h3>ValorantBypass</h3>
+                    <p>Vanguard TPM/Secure Boot Bypass Tool</p>
+                    <p>Tool developed for educational and research purposes that bypasses the TPM/Secure Boot popup in Valorant. Features include stopping Vanguard service, suspending watchdog processes, and using Sysinternals for safe process suspension. Written in C++.</p>
+                    <a href="https://github.com/leoEL69/ValorantBypass.git" target="_blank" class="btn">View on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </div>
 
             <div class="experience-box">
                 <div class="experience-content">
-                    <span class="year"><i class="fab fa-github"></i> <span data-translate="projects-cpp">C++ Project</span></span>
-                    <h3 data-translate="projects-gtfo">GTFO-EXTERNAL</h3>
-                    <p data-translate="projects-gtfo-subtitle">External Tool</p>
-                    <p data-translate="projects-gtfo-desc">External tool project written in C++. Check the GitHub repository for more details about this project.</p>
-                    <a href="https://github.com/leoEL69/GTFO-EXTERNAL.git" target="_blank" class="btn"><span data-translate="projects-github">View on GitHub</span> <i class="fab fa-github"></i></a>
+                    <span class="year"><i class="fab fa-github"></i> C++ Project</span>
+                    <h3>GTFO-EXTERNAL</h3>
+                    <p>External Tool</p>
+                    <p>External tool project written in C++. Check the GitHub repository for more details about this project.</p>
+                    <a href="https://github.com/leoEL69/GTFO-EXTERNAL.git" target="_blank" class="btn">View on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
@@ -130,5 +103,4 @@
 
 </body>
 </html>
-
 

@@ -6,7 +6,6 @@
     <title>Contact - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="translations.js"></script>
 
 </head>
 <body>
@@ -19,14 +18,11 @@
         </div>
 
         <nav id="navbar">
-            <a href="index.html" data-translate="nav-home">home</a>
-            <a href="Services.html" data-translate="nav-services">Services</a>
-            <a href="skills.html" data-translate="nav-skills">skills</a>
-            <a href="Experience.html" data-translate="nav-projects">Projects</a>
-            <a href="Contact.html" class="active" data-translate="nav-contact">Contact</a>
-            <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" title="Change Language">
-                <i class="fas fa-globe"></i> <span id="lang-icon">PT</span>
-            </button>
+            <a href="index.html">home</a>
+            <a href="Services.html">Services</a>
+            <a href="skills.html">skills</a>
+            <a href="Experience.html">Projects</a>
+            <a href="Contact.html" class="active">Contact</a>
         </nav>
     </header>
 
@@ -60,57 +56,34 @@
         document.addEventListener('click', (e) => {
             if (navbar.classList.contains('active') && 
                 !navbar.contains(e.target) && 
-                !menuIcon.contains(e.target) &&
-                !e.target.closest('#lang-toggle')) {
+                !menuIcon.contains(e.target)) {
                 navbar.classList.remove('active');
                 const icon = menuIcon.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
         });
-
-        const langToggle = document.getElementById('lang-toggle');
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                if (window.innerWidth <= 995) {
-                    setTimeout(() => {
-                        navbar.classList.remove('active');
-                        const icon = menuIcon.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }, 100);
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentLang = getCurrentLanguage();
-            const langIcon = document.getElementById('lang-icon');
-            if (langIcon) {
-                langIcon.textContent = currentLang === 'pt' ? 'PT' : 'EN';
-            }
-        });
     </script>
 
     <section class="contact">
-        <h2 class="heading"><span data-translate="contact-title">Contact</span> <span data-translate="contact-subtitle">Me</span></h2>
+        <h2 class="heading">Contact <span>Me</span></h2>
 
         <form id="contact-form" class="contact-form">
             <div class="input-box">
-                <input type="text" id="user_name" name="user_name" data-placeholder="contact-name" placeholder="Full Name" required>
-                <input type="email" id="user_email" name="user_email" data-placeholder="contact-email" placeholder="Email Address" required>
+                <input type="text" id="user_name" name="user_name" placeholder="Full Name" required>
+                <input type="email" id="user_email" name="user_email" placeholder="Email Address" required>
             </div>
 
             <div class="input-box">
-                <input type="text" id="subject" name="subject" data-placeholder="contact-subject" placeholder="Email Subject" required>
+                <input type="text" id="subject" name="subject" placeholder="Email Subject" required>
             </div>
 
-            <textarea id="message" name="message" cols="30" rows="10" data-placeholder="contact-message" placeholder="Your Message" required></textarea>
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
 
             <button type="submit" class="btn" id="submit-btn">
-                <span id="btn-text" data-translate="contact-send">Send Message</span>
+                <span id="btn-text">Send Message</span>
                 <span id="btn-loading" style="display: none;">
-                    <i class="fas fa-spinner fa-spin"></i> <span data-translate="contact-sending">Sending...</span>
+                    <i class="fas fa-spinner fa-spin"></i> Sending...
                 </span>
             </button>
             
@@ -121,7 +94,7 @@
             <div class="info-box">
                 <i class="fas fa-envelope"></i>
                 <div>
-                    <h3 data-translate="contact-email-label">Email</h3>
+                    <h3>Email</h3>
                     <p>leonardo.iazz098@gmail.com</p>
                 </div>
             </div>
@@ -130,8 +103,8 @@
             <div class="info-box">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
-                    <h3 data-translate="contact-location">Location</h3>
-                    <p data-translate="contact-location-text">São Paulo, Brazil</p>
+                    <h3>Location</h3>
+                    <p>In Memory, CPU</p>
                 </div>
             </div>
         </div>
@@ -163,27 +136,23 @@
             emailjs.sendForm('service_37m75ef', 'template_63t8u77', this)
                 .then(function() {
                     // Sucesso
-                    const currentLang = getCurrentLanguage();
-                    const successMsg = translations[currentLang]['contact-success'];
-                    formStatus.innerHTML = '<span style="color: #9333EA; font-weight: 600;"><i class="fas fa-check-circle"></i> ' + successMsg + '</span>';
+                    formStatus.innerHTML = '<span style="color: #9333EA; font-weight: 600;"><i class="fas fa-check-circle"></i> Message sent successfully!</span>';
                     document.getElementById('contact-form').reset();
                     
-                    // Esconder loading
+                
                     btnText.style.display = 'inline-block';
                     btnLoading.style.display = 'none';
                     submitBtn.disabled = false;
 
-                    // Limpar mensagem de sucesso após 5 segundos
+                
                     setTimeout(() => {
                         formStatus.innerHTML = '';
                     }, 5000);
                 }, function(error) {
-                    // Erro
-                    const currentLang = getCurrentLanguage();
-                    const errorMsg = translations[currentLang]['contact-error'];
-                    formStatus.innerHTML = '<span style="color: #ff6b6b; font-weight: 600;"><i class="fas fa-exclamation-circle"></i> ' + errorMsg + '</span>';
+                  
+                    formStatus.innerHTML = '<span style="color: #ff6b6b; font-weight: 600;"><i class="fas fa-exclamation-circle"></i> Failed to send message. Please try again.</span>';
                     
-                    // Esconder loading
+              
                     btnText.style.display = 'inline-block';
                     btnLoading.style.display = 'none';
                     submitBtn.disabled = false;
@@ -195,5 +164,4 @@
 
 </body>
 </html>
-
 
