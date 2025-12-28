@@ -6,6 +6,7 @@
     <title>Skills - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="translations.js"></script>
 
 </head>
 <body>
@@ -18,11 +19,14 @@
         </div>
 
         <nav id="navbar">
-            <a href="index.html">home</a>
-            <a href="Services.html">Services</a>
-            <a href="skills.html" class="active">skills</a>
-            <a href="Experience.html">Projects</a>
-            <a href="Contact.html">Contact</a>
+            <a href="index.html" data-translate="nav-home">home</a>
+            <a href="Services.html" data-translate="nav-services">Services</a>
+            <a href="skills.html" class="active" data-translate="nav-skills">skills</a>
+            <a href="Experience.html" data-translate="nav-projects">Projects</a>
+            <a href="Contact.html" data-translate="nav-contact">Contact</a>
+            <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" title="Change Language">
+                <i class="fas fa-globe"></i> <span id="lang-icon">PT</span>
+            </button>
         </nav>
     </header>
 
@@ -56,17 +60,40 @@
         document.addEventListener('click', (e) => {
             if (navbar.classList.contains('active') && 
                 !navbar.contains(e.target) && 
-                !menuIcon.contains(e.target)) {
+                !menuIcon.contains(e.target) &&
+                !e.target.closest('#lang-toggle')) {
                 navbar.classList.remove('active');
                 const icon = menuIcon.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
         });
+
+        const langToggle = document.getElementById('lang-toggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 995) {
+                    setTimeout(() => {
+                        navbar.classList.remove('active');
+                        const icon = menuIcon.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }, 100);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = getCurrentLanguage();
+            const langIcon = document.getElementById('lang-icon');
+            if (langIcon) {
+                langIcon.textContent = currentLang === 'pt' ? 'PT' : 'EN';
+            }
+        });
     </script>
 
     <section class="skills">
-        <h2 class="heading">My <span>Skills</span></h2>
+        <h2 class="heading"><span data-translate="skills-title">My</span> <span data-translate="skills-subtitle">Skills</span></h2>
 
         <div class="skills-container">
             <a href="#" class="skill-card">
@@ -126,4 +153,5 @@
 
 </body>
 </html>
+
 
